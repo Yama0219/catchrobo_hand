@@ -111,11 +111,8 @@ int main(void)
   step_control(&huart1, 2, 0, 0x00,  0x00);
   HAL_Delay(2);
 
-  step_control(&huart1, 2, deg_to_num(180.0f), 0x00,  0x00);
-  HAL_Delay(2000);
-  step_control(&huart1, 2, 0, 0x00,  0x00);
-  HAL_Delay(2000);
-  step_control(&huart1, 1, deg_to_num(92.0f), 0x00,  0x00);
+// servo wo genten no ichi ni motte iku
+
   while (1)
   {
       HAL_Delay(2);
@@ -123,14 +120,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//    step_control(&huart1, 1, deg_to_num(92.0f), 0x00,  0x00);
-//    HAL_Delay(2000);
-//    step_control(&huart1, 1, 0, 0x00,  0x00);
-//    HAL_Delay(2000);
-//    step_control(&huart1, 2, deg_to_num(180.0f), 0x00,  0x00);
-//    HAL_Delay(2000);
-//    step_control(&huart1, 2, 0, 0x00,  0x00);
-//    HAL_Delay(2000);
+
   }
   /* USER CODE END 3 */
 }
@@ -309,16 +299,38 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
   if (huart -> Instance == USART2) {
-    float number = atof(buffer);
 
-    int id = (int)(number / 1000);
+/* for testing */
 
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-    int angle = deg_to_num(((int)number)%1000);
-    step_control(&huart1, id, angle, 0x00,  0x00);
-    HAL_UART_Receive_IT(&huart2, buffer, UARTRxBufLEN);
+//    float number = atof(buffer);
+//
+//    int id = (int)(number / 1000);
+//
+//    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+//    int angle = deg_to_num(((int)number)%1000);
+//    step_control(&huart1, id, angle, 0x00,  0x00);
+//    HAL_UART_Receive_IT(&huart2, buffer, UARTRxBufLEN);
+
+
+
+
   }
 }
+
+void open() {
+  step_control(&huart1, 1, deg_to_num(0), 0x00,  0x00);
+}
+
+void close() {
+  step_control(&huart1, 1, deg_to_num(92), 0x00,  0x00);
+}
+
+void rotate(int angle) {
+//  hand no kaiten
+// angle no unit : degree
+  step_control(&huart1, 2, deg_to_num(angle), 0x00,  0x00);
+}
+
 /* USER CODE END 4 */
 
 /**
