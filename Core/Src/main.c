@@ -58,6 +58,10 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+void open();
+void close();
+void rotate(int angle);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -106,16 +110,18 @@ int main(void)
   read_address(&huart1, 1, 0x37, 0x01);
   HAL_UART_Receive_IT(&huart2, buffer, UARTRxBufLEN);
 
+
+// servo wo genten no ichi ni motte iku
+
   step_control(&huart1, 1, 0, 0x00,  0x00);
   HAL_Delay(2);
   step_control(&huart1, 2, 0, 0x00,  0x00);
   HAL_Delay(2);
 
-// servo wo genten no ichi ni motte iku
 
   while (1)
   {
-      HAL_Delay(2);
+
 
     /* USER CODE END WHILE */
 
