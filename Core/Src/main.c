@@ -34,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define OFFSET 10
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -121,7 +121,10 @@ int main(void)
 
   while (1)
   {
-
+//    open();
+//    HAL_Delay(1000);
+//    close();
+//    HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -334,7 +337,7 @@ void close() {
 void rotate(int angle) {
 //  hand no kaiten
 // angle no unit : degree
-  step_control(&huart1, 2, deg_to_num(angle), 0x00,  0x00);
+  step_control(&huart1, 2, deg_to_num(angle+OFFSET), 0x00,  0x00);
 }
 
 /* USER CODE END 4 */
